@@ -59,7 +59,7 @@ class MeetupController extends AbstractActionController
 
         return $this->redirect()->toRoute('meeting', [
             'controller' => 'meetup', 
-            'action'     => 'add'
+            'action'     => 'list'
         ]);
         
     }
@@ -97,13 +97,9 @@ class MeetupController extends AbstractActionController
         $form->setData($request->getPost());
        
         $this->table->saveMeetup($meetup);
-      
-
-
         return $this->redirect()->toRoute('meeting', [
           'controller' => 'meetup',
-          'action' => 'edit',
-          'id' => $id
+          'action' => 'list'
         ]);
     }
 
