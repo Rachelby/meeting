@@ -1,0 +1,50 @@
+
+<?php 
+
+$title = "Liste des Meetups"; 
+
+$this->headTitle($title); 
+
+?>
+
+<h2><?=$this->escapeHtml($title)?></h2>
+
+<p>
+	<a class="btn btn-success" href="<?php echo $this->url('meeting', ['action' => 'add']) ?>">Ajouter un meetup</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th width="5">ID</th>
+			<th width="20" >Titre</th>
+			<th width="20" >Description</th>
+			<th width="20">Dates</th>
+			<th width="20">Organisateur</th>
+			<th width="20">Organisation</th>
+			<th width="145">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($meetups as $meetup): ?>
+			<?php 
+				$dateD = new DateTime($meetup->getDateDebut());
+				$dateF = new DateTime($meetup->getDateFin());
+			
+			 ?>
+			<tr>
+				<td><?=$this->escapeHtml($meetup->getId()); ?></td>
+				<td><?=$this->escapeHtml($meetup->getTitre()); ?></td>
+				<td><?=$this->escapeHtml($meetup->getDescription()); ?></td>
+				<td><?=$this->escapeHtml('Du '.$dateD->format('d-m-Y') . ' Au ' . $dateF->format('d-m-Y') ); ?></td>
+				<td><?=$this->escapeHtml($meetup->getId()); ?></td>
+				<td><?=$this->escapeHtml($meetup->getId()); ?></td>
+				<td>
+					<a class="btn btn-warning" target="_blank" href="<?php echo $this->url('meeting', ['action' => 'edit', 'id' => $meetup->getId()]) ?>"> Modifier</a>
+					<a class="btn btn-danger"  href="<?php echo $this->url('meeting', ['action' => 'delete', 'id' => $meetup->getId()]) ?>"> Annuler</a>
+				</td>
+			</tr>
+		<?php endforeach ?>
+		
+		
+	</tbody>
+</table>

@@ -1,0 +1,28 @@
+<?php 
+
+$title = "Annuler le Meetup"; 
+
+$this->headTitle($title); 
+
+?>
+
+<h2><?=$this->escapeHtml($title)?></h2>
+
+<?php 
+
+	$url = $this->url('meeting', ['action' => 'delete', 'id' => $id]); 
+
+?>
+
+<form action="<?php echo $url; ?>" method="post">
+	<p>
+		Voulez-vous vraiment annuler ce meetup ? 
+	</p>
+	<div>
+		<input type="hidden" name="id" value="<?php echo $id; ?>">
+		<input type="submit" class="btn btn-danger" name="del" value="Yes">
+		<input type="submit" class="btn btn-default" name="del" value="No">
+	</div>
+	
+
+</form>

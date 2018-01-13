@@ -1,0 +1,38 @@
+
+<?php 
+
+$title = "Modifier le Meetup"; 
+
+$this->headTitle($title); 
+
+?>
+
+<h2><?=$this->escapeHtml($title)?></h2>
+
+<?php 
+
+	$form->setAttribute('action', $this->url('meeting', ['action' => 'edit', 'id' => $id])); 
+	$form->prepare(); 
+
+	echo $this->form()->openTag($form); 
+
+	echo $this->formHidden($form->get('id')); 
+
+	echo $this->formRow($form->get('titre'));
+	echo "<br>";
+	echo $this->formRow($form->get('organisateur'));
+	echo "<br>";
+	echo $this->formRow($form->get('organisation'));
+	echo "<br>";
+	echo $this->formRow($form->get('description'));
+	echo "<br>";
+	echo $this->formRow($form->get('dateDebut'));
+	echo "<br>";
+	echo $this->formRow($form->get('dateFin'));
+?>
+<br>
+
+<?php 
+	echo $this->formSubmit($form->get('submit'));
+	echo $this->form()->closeTag();
+ ?>
