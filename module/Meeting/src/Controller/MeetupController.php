@@ -57,10 +57,7 @@ class MeetupController extends AbstractActionController
 
         $this->table->saveMeetup($meetup); 
 
-        return $this->redirect()->toRoute('meeting', [
-            'controller' => 'meetup', 
-            'action'     => 'add'
-        ]);
+        $this->redirect()->toRoute('meeting', ['action' => 'list']);
         
     }
 
@@ -84,7 +81,7 @@ class MeetupController extends AbstractActionController
         $form->get('submit')->setAttribute('class', 'btn btn-success'); 
 
         $request = $this->getRequest();
-   
+        $request->isPost();
         //if not post request
         if (! $request->isPost()) {
             return new ViewModel([
@@ -98,13 +95,7 @@ class MeetupController extends AbstractActionController
        
         $this->table->saveMeetup($meetup);
       
-
-
-        return $this->redirect()->toRoute('meeting', [
-          'controller' => 'meetup',
-          'action' => 'edit',
-          'id' => $id
-        ]);
+        $this->redirect()->toRoute('meeting', ['action' => 'list']);
     }
 
     public function listAction()
