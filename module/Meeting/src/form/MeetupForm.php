@@ -27,10 +27,13 @@ class MeetupForm extends Form
 			'type' => 'text',
 			'class' => 'form-control',
 			'options' => [
-				'label' => 'Titre du meetup '
+				'label' => 'Titre du meetup ',
+				'min' => 1,
+                'max' => 50
 			]
 		]); 
 
+		//Recuperer les valeurs de la tables User
 		$this->add([
 			'name' => 'organisateur', 
 			'type' => 'Zend\Form\Element\Select',
@@ -45,6 +48,7 @@ class MeetupForm extends Form
 			]
 		]); 
 
+		//Recuperer les valeurs de la tables Organisation
 		$this->add([
 			'name' => 'organisation', 
 			'type' => 'Zend\Form\Element\Select',
@@ -64,7 +68,9 @@ class MeetupForm extends Form
 			'type' => 'text',
 			'class' => 'form-control',
 			'options' => [
-				'label' => 'Petite description du meetup '
+				'label' => 'Petite description du meetup ',
+				'min' => 1,
+                'max' => 200
 			]
 		]); 
 
