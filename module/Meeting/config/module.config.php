@@ -54,6 +54,11 @@ return [
            
         ],
     ],
+    'service_manager' => [
+        'factories' => [
+            Service\MeetupManager::class => Service\Factory\MeetupManagerFactory::class,
+        ],
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

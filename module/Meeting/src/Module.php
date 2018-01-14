@@ -35,7 +35,8 @@ class Module implements ConfigProviderInterface
     				$resultSetPrototype->setArrayObjectPrototype(new Model\Meetup); 
     				return new TableGateway('meetup', $adapter, null, $resultSetPrototype); 
     			}
-    		]
+    		], 
+           
     	]; 
     }
 
