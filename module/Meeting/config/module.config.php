@@ -10,7 +10,8 @@ namespace Meeting;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
-
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Meeting\Controller;
 return [
     'router' => [
         'routes' => [
@@ -31,6 +32,17 @@ return [
                     'defaults' => [
                         'controller' => Controller\MeetupController::class,
                         'action'     => 'list',
+                        //'action'     => 'add',
+                    ],
+                ],
+            ],
+            'index' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/index[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'index',
                         //'action'     => 'add',
                     ],
                 ],
@@ -56,6 +68,27 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+    ],
+
+    'doctrine' => [
+        'driver' => [
+            // defines an annotation driver with two paths, and names it `my_annotation_driver`
+            'my_annotation_driver' => [
+                'class' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [
+                    __DIR__.'/../src/Entity/',
+                ],
+            ],
+            // default metadata driver, aggregates all other drivers into a single one.
+            // Override `orm_default` only if you know what you're doing
+            'orm_default' => [
+                'drivers' => [
+                    // register `application_driver` for any entity under namespace `Meeting\Entity`
+                    'Meeting\src\Entity' => 'my_annotation_driver',
+                ],
+            ],
         ],
     ],
 ];

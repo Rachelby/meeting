@@ -47,7 +47,9 @@ class Module implements ConfigProviderInterface
     				return new Controller\MeetupController(
     					$container->get(Model\MeetupTable::class)
     				);
-    			}
+    			},
+                Controller\IndexController::class => 
+                    Controller\Factory\IndexControllerFactory::class, 
     		]
     	];
     }

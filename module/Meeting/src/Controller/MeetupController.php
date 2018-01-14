@@ -21,12 +21,12 @@ class MeetupController extends AbstractActionController
 
     public function indexAction()
     {
-        $meeting = $this->table->fetchAll(); 
+       /* $meeting = $this->table->fetchAll(); 
 
         foreach ($meeting as $meetup) {
             echo $meetup->getTitre() .' - '. $meetup->getDescription(); 
 
-        }
+        }*/
         return new ViewModel();
     }
 
@@ -57,14 +57,10 @@ class MeetupController extends AbstractActionController
 
         $this->table->saveMeetup($meetup); 
 
-<<<<<<< HEAD
-        $this->redirect()->toRoute('meeting', ['action' => 'list']);
-=======
         return $this->redirect()->toRoute('meeting', [
             'controller' => 'meetup', 
             'action'     => 'list'
         ]);
->>>>>>> d4ead037208912edf2be980172f5a38bef579603
         
     }
 
@@ -88,7 +84,7 @@ class MeetupController extends AbstractActionController
         $form->get('submit')->setAttribute('class', 'btn btn-success'); 
 
         $request = $this->getRequest();
-        $request->isPost();
+   
         //if not post request
         if (! $request->isPost()) {
             return new ViewModel([
@@ -101,15 +97,13 @@ class MeetupController extends AbstractActionController
         $form->setData($request->getPost());
        
         $this->table->saveMeetup($meetup);
-<<<<<<< HEAD
       
-        $this->redirect()->toRoute('meeting', ['action' => 'list']);
-=======
+
+
         return $this->redirect()->toRoute('meeting', [
           'controller' => 'meetup',
           'action' => 'list'
         ]);
->>>>>>> d4ead037208912edf2be980172f5a38bef579603
     }
 
     public function listAction()

@@ -1,32 +1,33 @@
 <?php
-/**
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Meeting\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Meeting\Entity\Meetup;
 
 class IndexController extends AbstractActionController
 {
-	protected $table; 
+	/**
+   * Entity manager.
+   * @var Doctrine\ORM\EntityManager
+   */
+    private $entityManager;
 
-	public function __construct($table)
-	{
-		$this->table = $table;
-	}
-
-    public function indexAction()
+    public function __construct($entityManager) 
     {
-    	$meeting = $this->table->fetchAll(); 
-	
-    	foreach ($meeting as $meetup) {
-    		echo $meetup->getTitre() .' - '. $meetup->getDescription(); 
+        $this->entityManager = $entityManager;
+    }
 
-    	}
-        return new ViewModel();
+    public function indexAction() 
+    {
+    // Get recent meetups
+        $meetups = $this->entityManager->getRepository(\Entity\Meetup::class)
+        ->findBy(['id'==1]);
+        
+    // Render the view template
+        return new ViewModel([
+          'meetups' => $meetups
+      ]);
     }
 }

@@ -1,0 +1,15 @@
+<h1>Meetup</h1>
+
+<?php foreach($meetups as $meetup): ?>
+
+<h3>
+  <a href="#">
+    <?= $this->escapeHtml($meetup->getTitre()); ?>
+  </a>    
+</h3>
+        
+<p>    
+   <?= $this->escapeHtml($meetup->getDescription()); ?>
+</p>
+
+<?php endforeach; ?>
